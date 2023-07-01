@@ -15,6 +15,33 @@ server.get('/', async (req,res) => {
 
 })
 
+interface IRequest {
+    name: string
+    email: string
+}
+
+server.post('/', async (req,res) => {
+   const { name , email}:IRequest = req.body
+
+   const userExist = await prisma.user.findFirst({
+    where:{
+        email
+    }
+   })
+   
+   if(userExist) return res.status(404).json({error: true, message: "Usuário já existe"})
+
+   const createUser = await prisma.user.create({
+        data: {
+            name,
+            email
+        }
+    })
+   
+    res.json(createUser)
+
+})
+
 server.listen(port, () => {
     console.log(`Server in running - http://localhost:${port} `);
     
