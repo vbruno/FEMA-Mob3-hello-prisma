@@ -8,6 +8,13 @@ const port = 3333
 
 server.use(express.json())
 
+server.use( (req, res, next) => {
+    console.log(
+        `[${new Date().getTime()}] - ${req.headers["x-forwarded-for"] || req.socket.remoteAddress} - ${req.method} - ${req.originalUrl}`
+    )
+    next()
+})
+
 server.get('/', async (req,res) => {
     const getAll = await prisma.user.findMany()
 
@@ -40,6 +47,43 @@ server.post('/', async (req,res) => {
    
     res.json(createUser)
 
+})
+
+server.put('/:id', async (req,res) => {
+   const { name , email}:IRequest = req.body
+   const { id } = req.params
+
+    const userExist = await prisma.user.findFirst({
+    where:{
+        id
+    }
+   })
+   
+   if(!userExist) return res.status(400).json({error: true, message: "Usuário não existe"})
+
+   const updateUser = await prisma.user.update({
+        where:{
+            id
+        },
+        data: {
+            name,
+            email
+        },
+        select: {
+            name: true,
+            email: true,
+            post: true
+        }
+    })
+   
+    res.json(updateUser)
+
+})
+
+
+
+server.use((req, res, next) => {
+    res.status(404).json({message: "Erro ao acessar a rota!"})
 })
 
 server.listen(port, () => {

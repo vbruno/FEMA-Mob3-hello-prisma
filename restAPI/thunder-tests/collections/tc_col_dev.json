@@ -10,11 +10,11 @@
             "colId": "fdd39ba1-3674-4b7a-9bac-ff21a535b22b",
             "containerId": "",
             "name": "getAll",
-            "url": "{{urlBase}}",
+            "url": "{{urlBase}}/",
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-07-01T00:59:10.685Z",
-            "modified": "2023-07-01T00:59:31.744Z",
+            "modified": "2023-07-07T23:44:51.231Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -34,6 +34,25 @@
             "body": {
                 "type": "json",
                 "raw": "{\n  \"name\":\"Vitor\",\n  \"email\":\"vitor@fema.com.br\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d24c86c4-7aec-4155-9f67-89dc45e99a70",
+            "colId": "fdd39ba1-3674-4b7a-9bac-ff21a535b22b",
+            "containerId": "",
+            "name": "updateUser",
+            "url": "{{urlBase}}/8a3054eb-4215-4222-8c39-71bc70cc1512",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2023-07-07T23:43:45.538Z",
+            "modified": "2023-07-07T23:46:23.483Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Batatinha123\",\n  \"email\":\"batatinhaFrita@fema.com.br\"\n}",
                 "form": []
             },
             "tests": []
