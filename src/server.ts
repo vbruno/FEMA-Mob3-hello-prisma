@@ -1,5 +1,6 @@
 import express from 'express'
 import { PrismaClient } from '@prisma/client'
+import { EnsureAuthenticateUser } from './middlewares/EnsureAuthenticateUser'
 
 const prisma = new PrismaClient()
 
@@ -27,7 +28,7 @@ interface IRequest {
     email: string
 }
 
-server.post('/', async (req,res) => {
+server.post('/', EnsureAuthenticateUser, async (req,res) => {
    const { name , email}:IRequest = req.body
 
    const userExist = await prisma.user.findFirst({
