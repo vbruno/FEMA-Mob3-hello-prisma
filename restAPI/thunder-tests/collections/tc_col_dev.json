@@ -56,6 +56,20 @@
                 "form": []
             },
             "tests": []
+        },
+        {
+            "_id": "b4e88410-7449-4e53-9ebb-f9912d3b9678",
+            "colId": "fdd39ba1-3674-4b7a-9bac-ff21a535b22b",
+            "containerId": "",
+            "name": "deleteUser",
+            "url": "{{urlBase}}/e50822e0-d128-49e5-91fe-1fc9c4e68821",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-07-08T00:52:23.865Z",
+            "modified": "2023-07-08T00:53:30.378Z",
+            "headers": [],
+            "params": [],
+            "tests": []
         }
     ]
 }

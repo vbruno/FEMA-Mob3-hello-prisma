@@ -81,6 +81,28 @@ server.put('/:id', async (req,res) => {
 })
 
 
+server.delete('/:id', async (req,res) => {
+   const { id } = req.params
+
+    const userExist = await prisma.user.findFirst({
+    where:{
+        id
+    }
+   })
+   
+   if(!userExist) return res.status(400).json({error: true, message: "Usuário não existe"})
+
+   const deleteUser = await prisma.user.delete({
+        where:{
+            id
+        },
+    })
+   
+    res.json(deleteUser)
+
+})
+
+
 
 server.use((req, res, next) => {
     res.status(404).json({message: "Erro ao acessar a rota!"})
