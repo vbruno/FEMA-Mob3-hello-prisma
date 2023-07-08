@@ -14,9 +14,13 @@
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-07-01T00:59:10.685Z",
-            "modified": "2023-07-07T23:44:51.231Z",
+            "modified": "2023-07-08T01:24:27.609Z",
             "headers": [],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "alskdlknslnaslknasld"
+            },
             "tests": []
         },
         {

@@ -16,7 +16,7 @@ server.use( (req, res, next) => {
     next()
 })
 
-server.get('/', async (req,res) => {
+server.get('/', EnsureAuthenticateUser, async (req,res) => {
     const getAll = await prisma.user.findMany()
 
     res.json(getAll)
@@ -28,7 +28,7 @@ interface IRequest {
     email: string
 }
 
-server.post('/', EnsureAuthenticateUser, async (req,res) => {
+server.post('/', async (req,res) => {
    const { name , email}:IRequest = req.body
 
    const userExist = await prisma.user.findFirst({
