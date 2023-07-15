@@ -3,41 +3,49 @@
     "colName": "Dev",
     "created": "2023-07-01T00:58:58.845Z",
     "sortNum": 10000,
-    "folders": [],
+    "folders": [
+        {
+            "_id": "cfd48878-d7eb-4536-b292-5758b03e9103",
+            "name": "user",
+            "containerId": "",
+            "created": "2023-07-15T01:08:06.099Z",
+            "sortNum": 10000
+        }
+    ],
     "requests": [
         {
             "_id": "e9d83d56-f5a4-4713-88f3-df7fc103810c",
             "colId": "fdd39ba1-3674-4b7a-9bac-ff21a535b22b",
-            "containerId": "",
+            "containerId": "cfd48878-d7eb-4536-b292-5758b03e9103",
             "name": "getAll",
-            "url": "{{urlBase}}/",
+            "url": "{{urlBase}}/user/getall",
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-07-01T00:59:10.685Z",
-            "modified": "2023-07-08T01:24:27.609Z",
+            "modified": "2023-07-15T01:22:04.804Z",
             "headers": [],
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "alskdlknslnaslknasld"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdG9yQGZlbWEuY29tLmJyIiwiaWF0IjoxNjg5MzgzODI5LCJleHAiOjE2ODk0NzAyMjksInN1YiI6IjVkZDkxY2JiLTg0ZWItNDNjNS1hYzU2LTEwOTE1MTdkMGFmOSJ9.qWviN7JKJkhpqEJHmEuvUbSpJMA59BM2Vsb3FHkr0Xg"
             },
             "tests": []
         },
         {
             "_id": "951651c4-2b37-450d-abfb-3f2e26785ea1",
             "colId": "fdd39ba1-3674-4b7a-9bac-ff21a535b22b",
-            "containerId": "",
+            "containerId": "cfd48878-d7eb-4536-b292-5758b03e9103",
             "name": "createUser",
-            "url": "{{urlBase}}",
+            "url": "{{urlBase}}/user/register",
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-07-01T01:06:13.923Z",
-            "modified": "2023-07-01T01:07:07.157Z",
+            "modified": "2023-07-15T01:11:24.390Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"name\":\"Vitor\",\n  \"email\":\"vitor@fema.com.br\"\n}",
+                "raw": "{\n  \"name\":\"Vitor\",\n  \"email\":\"vitor@fema.com.br\",\n  \"password\":\"12345\"\n}",
                 "form": []
             },
             "tests": []
@@ -45,26 +53,30 @@
         {
             "_id": "d24c86c4-7aec-4155-9f67-89dc45e99a70",
             "colId": "fdd39ba1-3674-4b7a-9bac-ff21a535b22b",
-            "containerId": "",
+            "containerId": "cfd48878-d7eb-4536-b292-5758b03e9103",
             "name": "updateUser",
-            "url": "{{urlBase}}/8a3054eb-4215-4222-8c39-71bc70cc1512",
+            "url": "{{urlBase}}/user/5dd91cbb-84eb-43c5-ac56-1091517d0af9",
             "method": "PUT",
             "sortNum": 30000,
             "created": "2023-07-07T23:43:45.538Z",
-            "modified": "2023-07-07T23:46:23.483Z",
+            "modified": "2023-07-15T01:23:55.973Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"name\":\"Batatinha123\",\n  \"email\":\"batatinhaFrita@fema.com.br\"\n}",
+                "raw": "{\n  \"email\":\"batatinha123@fema.com.br\"\n}",
                 "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdG9yQGZlbWEuY29tLmJyIiwiaWF0IjoxNjg5MzgzODI5LCJleHAiOjE2ODk0NzAyMjksInN1YiI6IjVkZDkxY2JiLTg0ZWItNDNjNS1hYzU2LTEwOTE1MTdkMGFmOSJ9.qWviN7JKJkhpqEJHmEuvUbSpJMA59BM2Vsb3FHkr0Xg"
             },
             "tests": []
         },
         {
             "_id": "b4e88410-7449-4e53-9ebb-f9912d3b9678",
             "colId": "fdd39ba1-3674-4b7a-9bac-ff21a535b22b",
-            "containerId": "",
+            "containerId": "cfd48878-d7eb-4536-b292-5758b03e9103",
             "name": "deleteUser",
             "url": "{{urlBase}}/e50822e0-d128-49e5-91fe-1fc9c4e68821",
             "method": "DELETE",
@@ -73,6 +85,25 @@
             "modified": "2023-07-08T00:53:30.378Z",
             "headers": [],
             "params": [],
+            "tests": []
+        },
+        {
+            "_id": "dfacf7e8-643e-465f-92ba-0eeb9b5d997a",
+            "colId": "fdd39ba1-3674-4b7a-9bac-ff21a535b22b",
+            "containerId": "cfd48878-d7eb-4536-b292-5758b03e9103",
+            "name": "authenticate user",
+            "url": "{{urlBase}}/user/authenticate",
+            "method": "POST",
+            "sortNum": 25000,
+            "created": "2023-07-15T01:16:26.615Z",
+            "modified": "2023-07-15T01:17:09.331Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"vitor@fema.com.br\",\n  \"password\":\"12345\"\n}",
+                "form": []
+            },
             "tests": []
         }
     ]

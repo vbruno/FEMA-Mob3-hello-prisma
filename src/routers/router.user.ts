@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 import { EnsureAuthenticateUser } from "../middlewares/EnsureAuthenticateUser";
+import { sign } from "jsonwebtoken";
 
 const userRoute = Router();
 
@@ -11,6 +12,10 @@ interface IRequestBody {
   email: string;
   password: string;
 }
+
+userRoute.get('/', (req,res) => {
+  res.json({msg:'Acessou a rota'})
+} )
 
 // Busca por todo os usuários
 userRoute.get("/getall", EnsureAuthenticateUser, async (req, res) => {
@@ -44,14 +49,14 @@ userRoute.get("/", EnsureAuthenticateUser, async (req, res) => {
             contains: String(email),
           },
           name: {
-            contains: String(nome)
-          }
+            contains: String(nome),
+          },
         },
       ],
     },
   });
 
-  res.json(getSearch)
+  res.json(getSearch);
 });
 
 // Registrar um usuário
@@ -78,6 +83,34 @@ userRoute.post("/register", async (req, res) => {
   res.json(createUser);
 });
 
+// Autentica Usuário
+userRoute.post("/authenticate", async (req, res) => {
+  const { email, password } = req.body;
+
+  const userExist = await prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
+
+  if (!userExist)
+    return res
+      .status(404)
+      .json({ error: true, message: "Email ou Senha invalida" });
+
+  if (userExist.password !== password)
+    return res
+      .status(404)
+      .json({ error: true, message: "Email ou Senha invalida" });
+
+  const token = sign({ email: userExist.email }, "ChaveSecreta", {
+    subject: userExist.id,
+    expiresIn: "1d",
+  });
+
+  res.json(token)
+});
+
 // Atualizar informação do usuário
 userRoute.put("/:id", EnsureAuthenticateUser, async (req, res) => {
   const { name, email, password }: IRequestBody = req.body;
@@ -92,7 +125,7 @@ userRoute.put("/:id", EnsureAuthenticateUser, async (req, res) => {
   if (!userExist)
     return res.status(400).json({ error: true, message: "Usuário não existe" });
 
-  let newInfo:IRequestBody = {name:"", email:"", password:""}
+  let newInfo: IRequestBody = { name: "", email: "", password: "" };
 
   name === undefined || name === userExist.name
     ? (newInfo.name = userExist.name!)
@@ -105,7 +138,7 @@ userRoute.put("/:id", EnsureAuthenticateUser, async (req, res) => {
   password === undefined || password === userExist.password
     ? (newInfo.password = userExist.password!)
     : (newInfo.password = password);
-  
+
   const updateUser = await prisma.user.update({
     where: {
       id,
@@ -141,3 +174,5 @@ userRoute.delete("/:id", EnsureAuthenticateUser, async (req, res) => {
 
   res.json(deleteUser);
 });
+
+export { userRoute };
